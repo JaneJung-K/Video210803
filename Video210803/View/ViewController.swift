@@ -47,6 +47,7 @@ class ViewController: UITableViewController {
         
         let VC = self.storyboard?.instantiateViewController(identifier: "SecondViewController") as! SecondViewController
         VC.userIndex = indexPath.row
+        VC.nTitle = videoData[indexPath.row].user.name
         self.navigationController?.pushViewController(VC, animated: true)
     }
 

@@ -21,15 +21,13 @@ class SecondViewController: UIViewController {
         
         videoManager.getVideo { [weak self] response in
             self?.videoData = response.videos
-            if let i = self?.userIndex {
-                print(self?.videoData[i].user.name)
-                self?.nTitle = self?.videoData[i].user.name
-            } else { return }
+
         }
     }
     
     override func viewDidLoad() {
-        self.navigationController?.title = nTitle!
+        self.title = nTitle!
+       
     }
     
 }

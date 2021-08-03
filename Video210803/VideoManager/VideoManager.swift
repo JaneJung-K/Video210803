@@ -23,7 +23,6 @@ struct VideoManager {
             .responseDecodable(of: Welcome.self) { response in
                 switch response.result {
                     case .success(let response):
-                        print(response.videos)
                     completion(response)
                     case .failure(let error):
                         print(error.localizedDescription)
