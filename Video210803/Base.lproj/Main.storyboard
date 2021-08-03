@@ -70,10 +70,10 @@
             </objects>
             <point key="canvasLocation" x="697.10144927536237" y="38.839285714285715"/>
         </scene>
-        <!--View Controller-->
+        <!--Second View Controller-->
         <scene sceneID="jia-ik-J8j">
             <objects>
-                <viewController id="5V6-Tb-D4j" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SecondViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5V6-Tb-D4j" customClass="SecondViewController" customModule="Video210803" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dTu-fm-jum">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

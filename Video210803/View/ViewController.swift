@@ -10,8 +10,8 @@ import Kingfisher
 
 class ViewController: UITableViewController {
     
-    lazy var videoManager = VideoManager()
-    var videoData: [Video] = []
+    lazy private var videoManager = VideoManager()
+    private var videoData: [Video] = []
     
     @IBOutlet var vTableView: UITableView!
     
@@ -45,6 +45,9 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
+        let VC = self.storyboard?.instantiateViewController(identifier: "SecondViewController") as! SecondViewController
+        VC.userIndex = indexPath.row
+        self.navigationController?.pushViewController(VC, animated: true)
     }
 
 }
