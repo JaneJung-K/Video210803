@@ -14,22 +14,23 @@ class SecondViewController: UIViewController, UICollectionViewDelegate, UICollec
     var userIndex: Int?
     var nTitle: String?
     var videoData2: [Video] = []
+    var isPlaying: Bool = false
+    var player: AVPlayer?
+    var count = 0
+    
+    @IBOutlet weak var plyButton: UIButton!
     
     @IBOutlet weak var pictureCollectionView: UICollectionView!
     @IBOutlet weak var thumnail: UIImageView!
     
-    @IBAction func playButton(_ sender: Any) {
-        
+    private func setupPlayerView() {
         let url = URL(string: (self.videoData2[self.userIndex!].videoFiles[0].link))
-        let player = AVPlayer(url: url!)
-        var playerLayer: AVPlayerLayer?
-        playerLayer = AVPlayerLayer(player: player)
-        playerLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        playerLayer!.frame = self.thumnail.frame
-        
-        self.view.layer.addSublayer(playerLayer!)
-
-        player.play()
+                
+        player = AVPlayer(url: url!)
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = self.thumnail.bounds
+        playerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        self.thumnail.layer.insertSublayer(playerLayer, at: 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,8 +42,29 @@ class SecondViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.title = nTitle!
         let url = URL(string: (self.videoData2[self.userIndex!].image))
         self.thumnail.kf.setImage(with: url)
-
+        
+        plyButton.addTarget(self, action: #selector(handlePause), for: .touchUpInside)
+        
+    }
+    
+    @objc func handlePause() {
+        count += 1
+        
+        if count == 1 {
+            setupPlayerView()
         }
+        
+        if isPlaying {
+            player?.pause()
+            plyButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        } else {
+            player?.play()
+            plyButton.setImage(UIImage(systemName: "pause"), for: .normal)
+        }
+        
+        isPlaying = !isPlaying
+        print(isPlaying)
+    }
         
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
