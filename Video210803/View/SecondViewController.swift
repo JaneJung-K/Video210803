@@ -9,17 +9,28 @@ import UIKit
 import Kingfisher
 import AVKit
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var userIndex: Int?
     var nTitle: String?
-
+    var videoData2: [Video] = []
     
     @IBOutlet weak var pictureCollectionView: UICollectionView!
     @IBOutlet weak var thumnail: UIImageView!
     
-    lazy private var videoManager = VideoManager()
-    private var videoData: [Video] = []
+    @IBAction func playButton(_ sender: Any) {
+        
+        let url = URL(string: (self.videoData2[self.userIndex!].videoFiles[0].link))
+        let player = AVPlayer(url: url!)
+        var playerLayer: AVPlayerLayer?
+        playerLayer = AVPlayerLayer(player: player)
+        playerLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        playerLayer!.frame = self.thumnail.frame
+        
+        self.view.layer.addSublayer(playerLayer!)
+
+        player.play()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false
@@ -28,42 +39,36 @@ class SecondViewController: UIViewController {
     
     override func viewDidLoad() {
         self.title = nTitle!
-        
-        setup()
-
+        let url = URL(string: (self.videoData2[self.userIndex!].image))
+        self.thumnail.kf.setImage(with: url)
 
         }
         
-        private func setup() {
-            videoManager.getVideo { [weak self] response in
-
-                self?.videoData = response.videos
-                let url = URL(string: (self?.videoData[self!.userIndex!].image)!)
-                self?.thumnail.kf.setImage(with: url)
-                print(self?.videoData[self!.userIndex!].videoPictures.count)
-                self?.pictureCollectionView.reloadData()
-        }
-        
-    }
     
-}
-
-extension SecondViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let pictureData = self.videoData[self.userIndex!].videoPictures
+        let pictureData = self.videoData2[self.userIndex!].videoPictures
         return pictureData.count
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UserPicture
-        let pictureIndex = self.videoData[self.userIndex!].videoPictures
+        let pictureIndex = self.videoData2[self.userIndex!].videoPictures
         let url = URL(string: (pictureIndex[indexPath.row].picture))
         cell.userPicture.kf.setImage(with: url)
         return cell
-        
     }
     
+}
+
+extension SecondViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let margin: CGFloat = 8
+        let itemSpacing: CGFloat = 10
+        //let width = 100
+        let width = (collectionView.bounds.height - margin * 2 - itemSpacing * 2) / 4
+        return CGSize(width: width, height: 100)
+    }
     
 }
 

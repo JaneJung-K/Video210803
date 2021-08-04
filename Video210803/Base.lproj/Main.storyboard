@@ -123,14 +123,30 @@
                                     <outlet property="delegate" destination="5V6-Tb-D4j" id="cr7-Gz-iZo"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIp-Nt-YfI">
+                                <rect key="frame" x="193.5" y="184.5" width="27" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="iRI-IX-OeS"/>
+                                    <constraint firstAttribute="width" constant="27" id="xta-4k-gcZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <state key="normal" image="play.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
+                                </state>
+                                <connections>
+                                    <action selector="playButton:" destination="5V6-Tb-D4j" eventType="touchUpInside" id="8xC-zQ-wh5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="00b-KX-s3v"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="00b-KX-s3v" firstAttribute="trailing" secondItem="ics-WO-08G" secondAttribute="trailing" id="0eL-fW-OUO"/>
                             <constraint firstItem="ics-WO-08G" firstAttribute="top" secondItem="nFW-ZL-qIO" secondAttribute="bottom" constant="8" symbolic="YES" id="3sN-BV-XGq"/>
+                            <constraint firstItem="uIp-Nt-YfI" firstAttribute="centerY" secondItem="nFW-ZL-qIO" secondAttribute="centerY" id="8wX-cV-8DK"/>
                             <constraint firstItem="00b-KX-s3v" firstAttribute="trailing" secondItem="nFW-ZL-qIO" secondAttribute="trailing" id="EW6-a5-9sS"/>
                             <constraint firstItem="00b-KX-s3v" firstAttribute="bottom" secondItem="nFW-ZL-qIO" secondAttribute="bottom" constant="506" id="MOQ-Bq-tNv"/>
+                            <constraint firstItem="uIp-Nt-YfI" firstAttribute="centerX" secondItem="nFW-ZL-qIO" secondAttribute="centerX" id="Yce-Qu-LKU"/>
                             <constraint firstItem="nFW-ZL-qIO" firstAttribute="leading" secondItem="00b-KX-s3v" secondAttribute="leading" id="vBy-TS-OKh"/>
                             <constraint firstItem="nFW-ZL-qIO" firstAttribute="top" secondItem="00b-KX-s3v" secondAttribute="top" id="xob-Mf-N6Q"/>
                         </constraints>
@@ -164,6 +180,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="play.fill" catalog="system" width="116" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

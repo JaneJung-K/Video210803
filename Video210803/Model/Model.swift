@@ -11,7 +11,8 @@ struct Welcome: Codable {
     let videos: [Video]
 }
 
-struct Video: Codable {
+class Video: Codable {
+    
     let url: String
     let image: String
     let user: User
@@ -25,7 +26,6 @@ struct Video: Codable {
         case videoFiles = "video_files"
         case videoPictures = "video_pictures"
     }
-    
 }
 
 struct User: Codable {
